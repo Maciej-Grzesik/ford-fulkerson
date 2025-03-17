@@ -1,0 +1,9 @@
+[package]
+name = "ford_fulkerson_maciej_grzesik_268372"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+petgraph = "0.7.1"
+rand = "0.9.0"
+plotters = "0.3.7"
