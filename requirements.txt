@@ -1,0 +1,14 @@
+design a grafph that is the worst case scenario 
+
+
+best case scenarios 
+
+EDGE CASES!!!!
+
+firsta parta up
+
+
+second part 
+
+computational complexity, vertices and edges different amount and weights
+conectivity  try desigining a full graph and sparse graphs

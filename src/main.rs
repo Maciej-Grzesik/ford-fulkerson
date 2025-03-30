@@ -5,7 +5,8 @@ use std::{cmp::min, collections::VecDeque, fs::File, io::Write, time::{Duration,
 use rand::prelude::*;
 
 fn main() {
-    let sizes: Vec<i32> = vec![10, 100, 1000, 10_000, 100_000];
+    //let sizes: Vec<i32> = vec![10, 100, 1000, 10_000, 100_000];
+    let sizes: Vec<i32> = vec![10];
     let temperatures: Vec<f64> = vec![0.9]; 
     // let temperatures: Vec<f64> = vec![0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]; 
     let mut results: Vec<(i32, f64, Duration)> = Vec::new();
@@ -119,7 +120,7 @@ fn generate_graph(number_of_nodes: i32, temperature: f64, weight: i32) -> DiGrap
 }
 
 fn draw_chart(results: &[(i32, f64, Duration)]) -> Result<(), Box<dyn std::error::Error>> {
-    let root = BitMapBackend::new("results.png", (1280, 720)).into_drawing_area();
+    let root = BitMapBackend::new("results.jpg", (1280, 720)).into_drawing_area();
     root.fill(&WHITE)?;
 
     let mut chart = ChartBuilder::on(&root)
@@ -142,9 +143,9 @@ fn draw_chart(results: &[(i32, f64, Duration)]) -> Result<(), Box<dyn std::error
 
     chart.draw_series(LineSeries::new(series, &RED))?
         .label("Execution Time")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], &RED));
+        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], RED));
 
-    chart.configure_series_labels().background_style(&WHITE).border_style(&BLACK).draw()?;
+    chart.configure_series_labels().background_style(WHITE).border_style(BLACK).draw()?;
 
     Ok(())
 }
