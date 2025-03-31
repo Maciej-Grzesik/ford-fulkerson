@@ -23,7 +23,7 @@ macro_rules! measure_time {
 fn main() {
     //let sizes: Vec<i32> = vec![10, 100, 1000, 10_000, 100_000, 1_000_000];
     let sizes = logspace(1_000, 1_000_000, 10);
-    let temperatures = vec![1.0, 2.0, 3.0, 5.0];
+    let temperatures = vec![1.0, 2.0, 3.0, 3.5];
     let max_duration = Duration::from_secs(300);
     let max_iterations = 1_000;
 
