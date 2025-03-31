@@ -1,7 +1,8 @@
-use petgraph::prelude::DiGraphMap;
+//use petgraph::prelude::DiGraphMap;
 use std::{cmp::min, collections::VecDeque};
+use crate::core::di_graph::DiGraphMap;
 
-fn bfs(graph: &DiGraphMap<i32, i32>, source: i32, sink: i32, parent: &mut Vec<Option<i32>>) -> bool {
+fn bfs(graph: &DiGraphMap<i32, i32>, source: i32, sink: i32, parent: &mut [Option<i32>]) -> bool {
     let mut visited: Vec<bool> = vec![false; graph.node_count()];
     let mut queue: VecDeque<i32> = VecDeque::new();
 

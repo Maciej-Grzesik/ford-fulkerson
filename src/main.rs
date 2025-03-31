@@ -1,13 +1,14 @@
 use plotters::prelude::*;
 use rand::{prelude::*, random_range};
 use std::time::{Duration, Instant};
-use petgraph::prelude::DiGraphMap;
+//use petgraph::prelude::DiGraphMap;
 use statrs::statistics::Statistics;
 
 mod algorithm;
 use algorithm::ford_fulkerson::ford_fulkerson;
 mod core;
 use core::logspace::logspace;
+use core::di_graph::DiGraphMap;
 
 macro_rules! measure_time {
     ($fn_call:expr) => {{
@@ -21,7 +22,7 @@ macro_rules! measure_time {
 
 fn main() {
     //let sizes: Vec<i32> = vec![10, 100, 1000, 10_000, 100_000, 1_000_000];
-    let sizes = logspace(100, 1_000_000, 10);
+    let sizes = logspace(1_000, 100_000, 10);
     let max_duration = Duration::from_secs(300);
     let max_iterations = 1_000;
 
@@ -85,7 +86,7 @@ fn generate_graph(number_of_nodes: i32, temperature: f64, weight: i32) -> DiGrap
     graph
 }
 
-fn plot_results(data: &Vec<(f64, f64, f64)>) {
+fn plot_results(data: &[(f64, f64, f64)]) {
     let root = BitMapBackend::new("results.png", (800, 600)).into_drawing_area();
     root.fill(&WHITE).unwrap();
 
