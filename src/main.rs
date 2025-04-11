@@ -1,4 +1,4 @@
-use plotters::{prelude::*, style::{colors, full_palette::{ORANGE, PURPLE}}};
+use plotters::{prelude::*, style::full_palette::{ORANGE, PURPLE}};
 use rand::{prelude::*, random_range};
 use std::{f64, time::{Duration, Instant}, vec};
 //use petgraph::prelude::DiGraphMap;
@@ -21,11 +21,10 @@ macro_rules! measure_time {
 }
 
 fn main() {
-    //let sizes: Vec<i32> = vec![10, 100, 1000, 10_000, 100_000, 1_000_000];
     let sizes = logspace(1_000, 1_000_000, 10);
-    let temperatures = vec![1.0, 2.0, 3.0, 3.5];
+    let temperatures = vec![1.0, 2.0, 3.0, 5.0];
     let max_duration = Duration::from_secs(300);
-    let max_iterations = 1_000;
+    let max_iterations = 10_000;
 
     let mut results_per_temp = Vec::new();
     
@@ -91,58 +90,6 @@ fn generate_graph(number_of_nodes: i32, temperature: f64, weight: i32) -> DiGrap
     graph
 }
 
-//fn plot_results(data: &Vec<(f64, Vec<(f64, f64, f64)>)>) {
-//    let root = BitMapBackend::new("results.png", (800, 600)).into_drawing_area();
-//    root.fill(&WHITE).unwrap();
-//
-//    let max_x = data.iter().flat_map(|(_, d)| d).map(|(x, _, _)| *x).fold(f64::NEG_INFINITY, f64::max);
-//    let max_y = data.iter().flat_map(|(_, d)| d).map(|(_, mean, err)| mean+err).fold(f64::NEG_INFINITY, f64::max);
-//
-//    let colors = [RED, BLUE, GREEN, PURPLE, YELLOW, ORANGE, MAGENTA];
-//
-//    let mut chart = ChartBuilder::on(&root)
-//        .caption("Ford-Fulkerson execution time", ("sans-serif", 20))
-//        .margin(10)
-//        .x_label_area_size(40)
-//        .y_label_area_size(40)
-//        .build_cartesian_2d(
-//            (0.0..max_x+1.0).log_scale(),
-//            0.0..max_y+1.0,
-//        )
-//        .unwrap();
-//
-//    chart
-//        .configure_mesh()
-//        .x_desc("Graph size (log scale)")
-//        .y_desc("Mean execution time [s]")
-//        .draw()
-//        .unwrap();
-//
-//
-//    for (i, (temp, d)) in data.iter().enumerate() {
-//        let color = colors[i % colors.len()];
-//        let points: Vec<(f64,f64)> = d.iter().map(|&(x,y,_)| (x,y)).collect();
-//
-//        chart.draw_series(LineSeries::new(points, color))
-//            .unwrap()
-//            .label(format!("Temp = {}", temp))
-//            .legend(move |(x,y)| PathElement::new(vec![(x,y), (x+10, y)], color));
-//
-//        chart
-//            .draw_series(d.iter().map(|&(x,y,err)| {
-//                ErrorBar::new_vertical(x, y-err, y, y+err, color.filled(), 10)
-//            }))
-//        .unwrap();
-//    }
-//
-//    chart
-//        .configure_series_labels()
-//        .border_style(BLACK)
-//        .draw()
-//        .unwrap();
-//
-//    root.present().unwrap();
-//}
 
 fn plot_results(data: &Vec<(f64, Vec<(f64, f64, f64)>)>) {
     let root = BitMapBackend::new("results.png", (800, 600)).into_drawing_area();
